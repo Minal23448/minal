@@ -1,0 +1,109 @@
+# PKI [Practical] - 21-06-2025
+
+## Objective 
+
+#### To Setup a Root CA and Sub CA, for Digital Signature 
+
+- Download and Install - XCA
+- Make a Folder --> My_Files --> PKI --> Lab1
+
+##### ROOT CA
+- Create new database for Root CA and proper file locations
+	- Give name : root_ca
+- Give Password for above installation
+- Also make a file for Root CA 
+- Generate a Private key for Root CA
+- Click on New Certificate --> Source --> Self-signed --> Select Template (CA) --> Apply Extension --> We will see in Advanced Tab
+
+-  Next Tab Subject --> Fill the Details --> Select the Private Key Below.
+-  Next Tab Extensions --> Range : 10 --> Ok
+
+-  Naming Convention (File System)
+	-  Root CA  --> 001-001-rootca-CRT
+	-  Sub CA --> 002-001
+
+-  Export table --> Give Location --> Export there in given Folder
+	-  Give name " 001-001-rootca-CRT.crt "
+
+##### SUB CA 
+- Create a new database --> subca --> Add in location
+- Create a new Private Key --> Done
+- Tab --> CSR --> New Request --> Give Name --> Select Templete -> default (CA) --> Apply Extension
+- Tab --> Fill Subject Details --> ok
+- Click on Export --> Give Proper Location -->
+	-  Give name " 002-001-subca-CSR.pem"
+
+ ##### ROOT CA 
+-  Now Open Root CA --> CSR --> Import --> Select --> Sub CA --> Done
+-  Now --> Create New Certificate 
+- Source --> Tick on all 3 tick , Select - Use this certificate for signing , Templete - Default (CA) --> Extension - Time Range : 5 --> OK
+- Export the certificate of Sub CA and Give location of Sub CA
+	- Give Name " 002-002-subca-CRT " --> save --> ok
+
+##### Sub CA
+- Open Tab Certificate --> Import -->  Select --> 002-002-subca-CRT --> Done
+
+ ##### TINKU - USER 
+- Create a new Database --> Tinku --> Add Password
+- Create a new Private Key --> Give name
+- Click on Tab CSR --> New request --> Fill the details of Source and Subject --> Select Default (CA) --> Give Email ID (tinku@gmail.com)
+- Export  -- > - Give Name " 003-001-tinku-CSR.pem"
+
+##### SUB CA 
+- Import the Certificate in Sub CA of Tinku and sign it 
+- Select No Templete --> Select Key Usage - Digital Signature 
+- Give Name " 003-002-tinku-CRT.crt"
+- Export the Certificate of tinku
+- Then Import it from Tinku 
+- Now Import one - by - one all certificate  OR select all
+
+- Select the Tinku Certificate --> Select - 3rd Option(pfx) --> Password
+	- Give Name " 003-003-tinku-CRT_CHAIN_KEY_ENC.pfx" 
+
+- Search for --> Type --> certmgr
+	- Trusted Root Certificate --> Certificates --> Import --> Root CA
+	- Personal --> Select Tinku-CRT_chain-key-enc.pfx
+ 
+##### Task : Make a word file as well as pdf and digital signed it by Tinku User
+
+----------------------------------
+
+
+### ROOTCA
+
+Name : www.iacsd.local
+IN, MH, Pune, IACSD, DITISS, root@iacsd.local, root@iacsd.local
+
+----------------------------------------------------
+
+### 	SUBCA
+
+name : www.ditiss.local
+Name:- IN
+MH, Pune, IACSD, DITISS, subca@iacsd.local, subca@iacsd.local
+
+----------------------------------------------------
+
+### 	TINKU
+
+name : www.tinku.local
+Name:- IN
+MH, Pune, IACSD, DITISS, tinku@iacsd.local, tinku@iacsd.local
+
+- x509 
+
+first create certiicate then export it ....then import 
+
+----------------------------------------------------------------
+
+RootCA 
+001 - 001-rootca-CRT
+
+SubCA 5
+002-001-subca-CSR
+002-002-subca-CRT
+
+Tinku
+003-001-tinku-CSR
+003-002-tinku-CRT
+003-003-tinku-CRT_CHAIN_KEY_ENC

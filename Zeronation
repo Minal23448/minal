@@ -1,0 +1,29 @@
+Zeronation
+step 1 downloads the image 
+than add the disk into the vm meachine 
+check the disk name by 
+sudo fdick -l
+sudo mkdir /mnt/testdisk
+sudo mount /dev/sdb1 /mnt/testdisk
+cp ~/Downloads/photo.jpg /mnt/testdisk/image1.jpg
+ls /mnt/testdisk
+rm /mnt/testdisk/image1.jpg
+sudo umount /mnt/testdisk
+sha1sum /dev/sdb > myhash.txt
+cat myhash.txt
+sudo dd if=/dev/sdb | pv | dd of=evidence.img
+sha1sum evidence.img
+cat myhash.txt
+# ✅ Should match if disk was not modified
+sudo mkdir -p /demo/recovered
+sudo apt update
+sudo apt install foremost -y
+sudo foremost -i evidence.img -o /demo/recovered
+ls /demo/recovered/jpg
+sudo ls -l /demo/recovered/jpg
+sudo cp /demo/recovered/jpg/00021506.jpg ~/Desktop/
+sudo xdg-open /demo/recovered/jpg/00021506.jpg
+sudo chown kali:kali /demo/recovered/jpg/00021506.jpg
+sudo chown -R kali:kali /demo/recovered
+ls /demo/recovered/jpg
+ls /demo/recovered/jpg

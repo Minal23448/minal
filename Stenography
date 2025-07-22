@@ -1,0 +1,17 @@
+cd ~/Downloads   # or where your image is
+sudo mkdir -p ~/my
+sudo mv fish.jpg ~/my
+cd ~/my
+mv fish.jpg iacsd.jpg
+sudo nano apache.txt
+sudo steghide embed -cf iacsd.jpg -ef apache.txt 
+#######the output is occure after that is 
+It gave:
+embedding "ayush.txt" in "one.jpg"... done
+steghide: could not open the file "hidden.jpg". 
+############################################
+#in same directory we do 
+mv ayush.txt ayush_backup.txt
+#to take the same name file overlaping or move the file to another directory 
+sudo steghide extract -sf one.jpg
+ cat ayush.txt
